@@ -1,20 +1,16 @@
 const puppeteer = require("puppeteer");
+const openai = require("openai");
 
-(async () => {
+async function getScrapedData(website) {
   /**
    * Set headless to true for @production use
    */
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  const url = "https://ayushsoni1010.com/";
+  const url = website || "https://ayushsoni1010.com/";
 
   try {
     await page.goto(url);
-
-    /**
-     * Added @function `await page.waitForSelector()` to ensure that the necessary elements are loaded before scraping
-     */
-    // await page.waitForSelector("chakra-stack");
 
     /**
      * @screenshot of the portfolio website
@@ -30,49 +26,63 @@ const puppeteer = require("puppeteer");
     });
 
     /**
-     * @data Handling
+     * @get the pages HTML content
      */
-    const [name, title, socials, externalLinks, skills] = await Promise.all([
-      page.$eval(".chakra-text.css-vx7vjy", (username) => username.innerText),
-      page.$$eval(".chakra-stack.css-x9juev:nth-child(2)", (title) => {
-        let designation;
-        title.forEach((ele) => {
-          designation = ele.innerText.split("\n\n").join(" ");
-        });
-        return designation;
-      }),
-      page.$$eval(".chakra-button__group.css-1ind3v2 div a", (socials) =>
-        socials.map((ele) => ({
-          url: ele.href,
-          type: ele.getAttribute("aria-label"),
-        }))
-      ),
-      page.$$eval(".chakra-button__group.css-10aphcx a", (externalLinks) =>
-        externalLinks.map((ele) => ({
-          url: ele.href,
-          type: ele.textContent.trim(),
-        }))
-      ),
-      page.$$eval(".css-1c1a7ns .css-0 span img[aria-label]", (skillsData) =>
-        skillsData.map((ele) => ({
-          skill: ele.getAttribute("aria-label"),
-        }))
-      ),
-    ]);
+    const pageContent = await page.content();
 
     /**
-     * @merge the two array and remove @duplicates
+     * @data Handling
      */
-    const links = [...socials, ...externalLinks].filter((link, index, self) => {
-      const existingLink = self.findIndex((l) => l.type === link.type);
-      return existingLink === index;
-    });
+    const [textContent, linkedin, github, twitter, instagram, resume, other] =
+      await Promise.all([
+        page.$eval("*", (item) => item.textContent),
+        page.$eval('a[href*="linkedin.com"]', (item) => item?.href),
+        page.$eval('a[href*="github.com"]', (item) => item?.href),
+        page.$eval('a[href*="twitter.com"]', (item) => item?.href),
+        page.$eval('a[href*="instagram.com"]', (item) => item?.href),
+        page.$eval('a[href*="resume"]', (item) => item?.href),
+        page.$$eval('a[href^="http"]', (item) => item.map((link) => link.href)),
+      ]);
+
+    /**
+     * @extract potential locations using regular expressions
+     */
+    const locationRegex = /Location: (.+)/i;
+    const location = pageContent.match(locationRegex);
+
+    /**
+     * @extract potential names using regular expressions
+     */
+    const nameRegex = /[A-Z][a-z]+ [A-Z][a-z]+/g;
+    const names = pageContent.match(nameRegex);
+
+    /**
+     * @extract potential emails using regular expressions
+     */
+    const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+    const emails = pageContent.match(emailRegex);
+
+    /**
+     * @extract potential numbers using regular expressions
+     */
+    const numberRegex = /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g;
+    const mobileNumbers = pageContent.match(numberRegex);
 
     const portfolioData = {
-      name,
-      title,
-      links,
-      skills,
+      site: url,
+      name: names || [],
+      email: emails || [],
+      mobile: mobileNumbers || [],
+      location: location,
+      links: {
+        linkedin: linkedin || "https://linkedin.com/",
+        github: github || "https://github.com/",
+        twitter: twitter || "https://twitter.com/",
+        instagram: instagram || "https://instagram.com/",
+        resume: resume || "",
+        other: other || [],
+      },
+      textContent: textContent,
     };
 
     /**
@@ -80,32 +90,6 @@ const puppeteer = require("puppeteer");
      */
     // console.log(JSON.stringify(portfolioData, null, 2));
     console.log(portfolioData);
-
-    // const portfolioData = await page.evaluate(() => {
-    //   const links = Array.from(
-    //     document.querySelectorAll(".chakra-button__group.css-1ind3v2 div a")
-    //   ).map((ele) => ({
-    //     link: ele.href,
-    //   }));
-
-    //   const externalLinks = Array.from(
-    //     document.querySelectorAll(".chakra-button__group.css-10aphcx a")
-    //   ).map((ele) => ({
-    //     link: ele.href,
-    //   }));
-
-    // const skillsData = Array.from(
-    //   document.querySelectorAll(".css-1c1a7ns .css-0 span img[aria-label]")
-    // );
-
-    //   const skills = skillsData.map((ele) => ({
-    //     skill: ele.getAttribute("aria-label"),
-    //   }));
-
-    //   return { links, externalLinks, skills };
-    // });
-
-    // console.log(portfolioData, 1010);
   } catch (error) {
     /**
      * @error Handling
@@ -117,4 +101,6 @@ const puppeteer = require("puppeteer");
      */
     await browser.close();
   }
-})();
+}
+
+getScrapedData("https://ayushsoni1010.com");
