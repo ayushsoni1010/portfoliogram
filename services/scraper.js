@@ -4,7 +4,7 @@ async function getScrapedData(website) {
   // Set headless to true for @production use
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  const url = website || "https://ayushsoni1010.com/";
+  const url = website;
 
   try {
     await page.goto(url);
@@ -22,56 +22,70 @@ async function getScrapedData(website) {
     const pageContent = await page.content();
 
     // Data Handling
-    const [innerText, linkedin, github, twitter, instagram, resume, other] =
-      await Promise.all([
-        page
-          .$eval("*", (item) => item.innerText)
-          .catch((error) => {
-            console.error("Error: ", error);
-            return "";
-          }),
-        page
-          .$eval('a[href*="linkedin.com"]', (item) => item?.href)
-          .catch((error) => {
-            console.error("Error: ", error);
-            return "";
-          }),
-        page
-          .$eval('a[href*="github.com"]', (item) => item?.href)
-          .catch((error) => {
-            console.error("Error: ", error);
-            return "";
-          }),
-        ,
-        page
-          .$eval('a[href*="twitter.com"]', (item) => item?.href)
-          .catch((error) => {
-            console.error("Error: ", error);
-            return "";
-          }),
-        ,
-        page
-          .$eval('a[href*="instagram.com"]', (item) => item?.href)
-          .catch((error) => {
-            console.error("Error: ", error);
-            return "";
-          }),
-        ,
-        page
-          .$eval('a[href*="resume"]', (item) => item?.href)
-          .catch((error) => {
-            console.error("Error: ", error);
-            return "";
-          }),
-        ,
-        page
-          .$$eval('a[href^="http"]', (item) => item.map((link) => link.href))
-          .catch((error) => {
-            console.error("Error: ", error);
-            return "";
-          }),
-        ,
-      ]);
+    const [
+      innerText,
+      linkedin,
+      github,
+      twitter,
+      instagram,
+      resume,
+      other,
+      label,
+    ] = await Promise.all([
+      page
+        .$eval("*", (item) => item.innerText)
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+      page
+        .$eval('a[href*="linkedin.com"]', (item) => item?.href)
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+      page
+        .$eval('a[href*="github.com"]', (item) => item?.href)
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+      page
+        .$eval('a[href*="twitter.com"]', (item) => item?.href)
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+      page
+        .$eval('a[href*="instagram.com"]', (item) => item?.href)
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+      page
+        .$eval('a[href*="resume"]', (item) => item?.href)
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+      page
+        .$$eval('a[href^="http"]', (item) => item.map((link) => link.href))
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+      page
+        .$$eval("img[alt]", (items) =>
+          items.map((item) => item.getAttribute("alt"))
+        )
+        .then((altAttributes) => {
+          return altAttributes; // Return alt attributes for label
+        })
+        .catch((error) => {
+          console.error("Error: ", error);
+          return "";
+        }),
+    ]);
 
     // Extract potential locations using regular expressions
     const locationRegex = /Location: (.+)/i;
@@ -103,6 +117,7 @@ async function getScrapedData(website) {
         resume: resume || "",
         other: other || [],
       },
+      label: label, // Label is now defined
       text: innerText,
     };
 

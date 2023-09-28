@@ -118,3 +118,50 @@ const puppeteer = require("puppeteer");
     await browser.close();
   }
 })();
+
+
+const skillKeywords = [
+  "JavaScript",
+  "HTML",
+  "CSS",
+  "Python",
+  "Java",
+  "C++",
+  "Ruby",
+  "React",
+  "Angular",
+  "Vue.js",
+  "Node.js",
+  "SQL",
+  "MongoDB",
+  "Express.js",
+  "Ruby on Rails",
+  "PHP",
+  "ASP.NET",
+  "Swift",
+  "Kotlin",
+  "Git",
+  "Docker",
+  "AWS",
+  "Azure",
+  "Google Cloud",
+  "Machine Learning",
+  "Data Analysis",
+  "UI/UX Design",
+  "Graphic Design",
+  "Digital Marketing",
+  "Content Marketing",
+  "SEO",
+  "Social Media Marketing",
+  "Project Management",
+  "Agile",
+  "Scrum",
+  "Leadership",
+  "Communication",
+  "Problem Solving",
+  "Creativity",
+  "Time Management",
+  // Add more skills as needed
+];
+
+console.log(skillKeywords);
