@@ -32,15 +32,55 @@ async function getScrapedData(website) {
     /**
      * @data Handling
      */
-    const [textContent, linkedin, github, twitter, instagram, resume, other] =
+    const [innerText, linkedin, github, twitter, instagram, resume, other] =
       await Promise.all([
-        page.$eval("*", (item) => item.innerText),
-        page.$eval('a[href*="linkedin.com"]', (item) => item?.href),
-        page.$eval('a[href*="github.com"]', (item) => item?.href),
-        page.$eval('a[href*="twitter.com"]', (item) => item?.href),
-        page.$eval('a[href*="instagram.com"]', (item) => item?.href),
-        page.$eval('a[href*="resume"]', (item) => item?.href),
-        page.$$eval('a[href^="http"]', (item) => item.map((link) => link.href)),
+        page
+          .$eval("*", (item) => item.innerText)
+          .catch((error) => {
+            console.error("Error: ", error);
+            return "";
+          }),
+        page
+          .$eval('a[href*="linkedin.com"]', (item) => item?.href)
+          .catch((error) => {
+            console.error("Error: ", error);
+            return "";
+          }),
+        page
+          .$eval('a[href*="github.com"]', (item) => item?.href)
+          .catch((error) => {
+            console.error("Error: ", error);
+            return "";
+          }),
+        ,
+        page
+          .$eval('a[href*="twitter.com"]', (item) => item?.href)
+          .catch((error) => {
+            console.error("Error: ", error);
+            return "";
+          }),
+        ,
+        page
+          .$eval('a[href*="instagram.com"]', (item) => item?.href)
+          .catch((error) => {
+            console.error("Error: ", error);
+            return "";
+          }),
+        ,
+        page
+          .$eval('a[href*="resume"]', (item) => item?.href)
+          .catch((error) => {
+            console.error("Error: ", error);
+            return "";
+          }),
+        ,
+        page
+          .$$eval('a[href^="http"]', (item) => item.map((link) => link.href))
+          .catch((error) => {
+            console.error("Error: ", error);
+            return "";
+          }),
+        ,
       ]);
 
     /**
@@ -81,7 +121,7 @@ async function getScrapedData(website) {
         resume: resume || "",
         other: other || [],
       },
-      // textContent: textContent,
+      text: innerText,
     };
 
     /**
