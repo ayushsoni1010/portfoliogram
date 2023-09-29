@@ -8,8 +8,27 @@ async function generateJSONData(prompt) {
   try {
     const response = await openai.completions.create({
       model: "text-davinci-003",
-      prompt: `Select one name of a person which could be an individual from any country and a real existing person, and suggest the designation of the person using the below data and Please organize the URLs of a specific individual in a JSON format, making sure to eliminate any duplicates. Only display the unique URLs for Instagram, LinkedIn, Twitter, and GitHub, and be sure to categorize them based on their respective social platforms. For GitHub, please provide a link to the user profile rather than a repository. Please ensure that the URL values align with their appropriate social platforms, such as using only "instagram.com" for links under Instagram. Additionally, any other urls mentioned should be placed in the "other: []" object from ${prompt[0]}`,
-      max_tokens: 256,
+      prompt: `Select a real person and suggest their designation that matches their skill from ${prompt}. Organize their unique URLs for Instagram, LinkedIn, Twitter, and GitHub in this JSON format:
+      {
+        "siteURL": "",
+        "name": "[Person's Name]",
+        "designation": "[Given Designation]",
+        "emails": [],
+        "mobile_number": "",
+        "location": "",
+        "links": {
+          "linkedin": "[LinkedIn Profie URL]",
+          "twitter": "[Twitter Profile URL]",
+          "github": "[GitHub Profile URL, no repo url]",
+          "instagram": "[Instagram URL]",
+          "other_links": {
+          }
+        }
+      }
+      `,
+      max_tokens: 1000,
+      temperature: 0.4,
+      top_p: 0.3,
     });
 
     // Extract the data from the response
@@ -20,12 +39,19 @@ async function generateJSONData(prompt) {
   }
 }
 
-async function extractSkillsFromJSON(prompt) {
+async function extractOtherData(prompt) {
   try {
     const response = await openai.completions.create({
       model: "text-davinci-003",
-      prompt: `Shorten the text under 3000 characters and list out all the skills and experiences point, evaluation metrics from the text on the website (software skills, core competencies) from this data${prompt[1]}`,
-      max_tokens: 256,
+      prompt: `shorten the text under 3000 characters + list out only data including only software skills, and evaluation metrics of only core-competencies from ${prompt} in the JSON format as a third person perspective like below format:
+      {
+        "skills": "SKILL1, SKILL2",
+        "core-competencies": ""
+      }
+      `,
+      max_tokens: 500,
+      temperature: 0.2,
+      top_p: 0.1,
     });
 
     // Extract the data from the response
@@ -39,5 +65,5 @@ async function extractSkillsFromJSON(prompt) {
 module.exports = {
   openai,
   generateJSONData,
-  extractSkillsFromJSON,
+  extractOtherData,
 };
