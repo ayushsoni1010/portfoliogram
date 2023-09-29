@@ -18,6 +18,10 @@ async function getScrapedData(website) {
       height: 800,
     });
 
+    // Extract data from the page
+    const title = await page.title();
+    const pageUrl = page.url();
+
     // Get the pages HTML content
     const pageContent = await page.content();
 
@@ -117,8 +121,7 @@ async function getScrapedData(website) {
         resume: resume || "",
         other: other || [],
       },
-      label: label, // Label is now defined
-      text: innerText,
+      text: label + "," + innerText,
     };
 
     // console.log(JSON.stringify(portfolioData, null, 2));
