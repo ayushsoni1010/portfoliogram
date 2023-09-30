@@ -1,6 +1,6 @@
-const readline = require("readline");
-const { generateJSONData, extractOtherData } = require("./services/openai");
-const { getScrapedData } = require("./services/scraper");
+import readline from "readline";
+import { generateJSONData, extractOtherData } from "./services/openai.js";
+import { getScrapedData } from "./services/scraper.js";
 
 const read = readline.createInterface({
   input: process.stdin,
