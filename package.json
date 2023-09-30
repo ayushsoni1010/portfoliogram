@@ -1,23 +1,54 @@
 {
-  "name": "website-scrapper",
+  "name": "portfolio-pulse",
   "version": "1.0.0",
-  "description": "",
+  "description": "Portfolio Pulse is a web scraping and data extraction tool for analyzing portfolio websites. It extracts information about individuals, their skills, and social profiles, providing valuable insights.",
   "main": "index.js",
+  "type": "module",
+  "license": "AGPL-3.0",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "https://github.com/ayushsoni1010/portfolio-pulse",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayushsoni1010/portfolio-pulse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ayushsoni1010/portfolio-pulse/issues"
+  },
+  "keywords": [
+    "web scraping",
+    "data extraction",
+    "portfolio analysis",
+    "Node.js",
+    "TypeScript"
+  ],
+  "author": {
+    "name": "Ayush Soni",
+    "email": "ayushsoni1010.work@gmail.com",
+    "url": "https://ayushsoni1010.com"
+  },
+  "contributors": [],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.8.0",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "langchain": "^0.0.156",
     "nodemon": "^3.0.1",
-    "openai": "^4.10.0",
+    "openai": "^4.11.0",
     "path": "^0.12.7",
-    "puppeteer": "^21.3.5"
+    "puppeteer": "^19.11.1",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
   }
 }
