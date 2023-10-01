@@ -1,9 +1,4 @@
-import OpenAI from "openai";
-import * as dotenv from "dotenv";
-dotenv.config();
-
-// Initialize openai object with the API key
-const openai = new OpenAI({ apiKey: process.env.OPEN_AI_KEY });
+import openai from "../config/openai.js";
 
 async function askGenie(type, data) {
   if (!data) {
@@ -61,4 +56,4 @@ async function askGenie(type, data) {
   }
 }
 
-export { openai, askGenie };
+export { askGenie };
