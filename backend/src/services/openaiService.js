@@ -1,11 +1,12 @@
 import openai from "../config/openai.js";
+import { errorResponse } from "../utils/response.js";
 
 async function askGenie(type, data) {
   if (!data) {
     return "";
   }
 
-  const promts = {
+  const prompts = {
     personal: `Select a real person from the provided data ${data} and suggest their designation that matches their skills. Remove duplicate email addresses and add location and mobile number from the data. Create a JSON object in the following format:
       {
         "name": "[Person's Name]",
@@ -42,7 +43,7 @@ async function askGenie(type, data) {
   try {
     const response = await openai.completions.create({
       model: "text-davinci-003",
-      prompt: promts[type] ? promts[type] : data,
+      prompt: prompts[type] ? prompts[type] : data,
       max_tokens: 1000,
       temperature: 0.3,
       top_p: 0.1,
@@ -56,4 +57,27 @@ async function askGenie(type, data) {
   }
 }
 
-export { askGenie };
+async function generalGenie(_request, response, prompt) {
+  if (!prompt) {
+    return errorResponse(response, "Please provide a valid prompt");
+  }
+
+  try {
+    const response = await openai.completions.create({
+      model: "text-davinci-003",
+      prompt: prompt,
+      max_tokens: 500,
+      temperature: 0.3,
+      top_p: 0.1,
+    });
+
+    // Extract the data from the response
+    const data = response?.choices[0]?.text;
+    return data;
+  } catch (error) {
+    console.log("Error", error);
+    return errorResponse(response, error);
+  }
+}
+
+export { askGenie, generalGenie };

@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import scraperRoutes from "./routes/scraperRoutes.js";
+import openaiRoutes from "./routes/openaiRoutes.js";
 import { logRequestResponse } from "./middlewares/index.js";
 import { connectMongoDB } from "./config/connection.js";
 
@@ -21,8 +22,8 @@ app.use(cors());
 // app.use(logRequestResponse("log.txt"));
 
 // Routes
-app.use("/api", scraperRoutes);
-// app.use("/api", openaiRoutes);
+app.use("/api/web", scraperRoutes);
+app.use("/api/ai", openaiRoutes);
 
 app.get("/", (_req, res) => {
   res.json({ message: "Hey there!" });

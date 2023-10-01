@@ -1,10 +1,11 @@
 import express from "express";
-import scraperController from "../controllers/scraperController";
+import { generateAnswers } from "../controllers/openaiController.js";
+import { successResponse, errorResponse } from "../utils/response.js";
 
 const router = express.Router();
 
-router.get("/openai", async (_request, response) => {
-  return response.send("Welcome to OpenAI API");
+router.get("/", async (_request, response) => {
+  return successResponse(response, "Welcome to OpenAI API");
 });
 
 router.post("/generate", async (request, response) => {
@@ -12,16 +13,16 @@ router.post("/generate", async (request, response) => {
     const prompt = request?.body?.prompt;
 
     if (!prompt) {
-      response.json({ message: "Please enter the prompt to generate data" });
+      return errorResponse(
+        response,
+        "Please enter the prompt to generate data"
+      );
     }
 
-    const data = scraperController.scrapeData(prompt, response);
-    response.json(data);
+    return await generateAnswers(request, response);
   } catch (error) {
-    console.error(`----> Error found: ${error}`);
-    response
-      .status(500)
-      .json({ error: "An error occured while generating scraped data." });
+    console.error(`Error: ${error}`);
+    errorResponse(response, "An error occured while generating data.", error);
   }
 });
 
