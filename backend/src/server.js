@@ -19,7 +19,7 @@ const MONGO_URL = process.env.MONGO_URL;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-// app.use(logRequestResponse("log.txt"));
+app.use(logRequestResponse("log.txt"));
 
 // Routes
 app.use("/api/web", scraperRoutes);
