@@ -1,27 +1,28 @@
 import express from "express";
-import scraperController from "../controllers/scraperController";
+import { handleScrapeData } from "../controllers/scraperController.js";
+import { errorResponse, successResponse } from "../utils/response.js";
 
 const router = express.Router();
 
 router.get("/", async (_request, response) => {
-  return response.send("Welcome to Portfolio-Pulse API");
+  return successResponse(response, "Welcome to Portfolio-Pulse API");
 });
 
 router.get("/scrape", async (request, response) => {
   try {
-    const website = request?.body?.website;
+    const website = request?.query?.website;
 
     if (!website) {
       response.json({ message: "Please enter the website url: " });
     }
-
-    const data = scraperController.scrapeData(website, response);
-    response.json(data);
+    return handleScrapeData(request, response);
   } catch (error) {
-    console.error(`----> Error found: ${error}`);
-    response
-      .status(500)
-      .json({ error: "An error occured while scraping data." });
+    console.error(`Error: ${error}`);
+    return errorResponse(
+      response,
+      "An error occured while scraping data.",
+      error
+    );
   }
 });
 
