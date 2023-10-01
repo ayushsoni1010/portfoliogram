@@ -8,14 +8,15 @@ router.get("/", async (_request, response) => {
   return successResponse(response, "Welcome to Portfolio-Pulse API");
 });
 
-router.get("/scrape", async (request, response) => {
+router.get("/generate", async (request, response) => {
   try {
     const website = request?.query?.website;
 
     if (!website) {
-      response.json({ message: "Please enter the website url: " });
+      errorResponseResponse(response, "Please enter the website url: ");
     }
-    return handleScrapeData(request, response);
+
+    return await handleScrapeData(request, response);
   } catch (error) {
     console.error(`Error: ${error}`);
     return errorResponse(
