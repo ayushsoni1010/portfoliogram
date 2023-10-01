@@ -1,0 +1,5 @@
+New Log:
+	--> Date   = 01/10/2023, 2:54:47 pm
+	--> IP     = ::1
+	--> Method = GET
+	--> Path   = /
