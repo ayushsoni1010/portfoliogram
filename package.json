@@ -45,5 +45,8 @@
     "openai": "^4.11.0",
     "path": "^0.12.7",
     "puppeteer": "^19.11.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
