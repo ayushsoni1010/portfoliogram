@@ -7,3 +7,27 @@ New Log:
 	--> Path   = /api/web/generate
 	--> Body   = devnishant.vercel.app
 	
+
+New Log:
+	--> Date   = 04/10/2023, 3:54:33 am
+	--> IP     = ::1
+	--> Method = POST
+	--> Path   = /api/web/generate
+	--> Body   = ayushsoni1010.com
+	
+
+New Log:
+	--> Date   = 04/10/2023, 4:11:26 am
+	--> IP     = ::1
+	--> Method = POST
+	--> Path   = /api/web/generate
+	--> Body   = ayushsoni1010.com
+	
+
+New Log:
+	--> Date   = 04/10/2023, 4:25:40 am
+	--> IP     = ::1
+	--> Method = POST
+	--> Path   = /api/web/generate
+	--> Body   = ayushsoni1010.com
+	
