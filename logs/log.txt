@@ -1,24 +1,9 @@
-New Log:
-	--> Date   = 01/10/2023, 2:54:47 pm
-	--> IP     = ::1
-	--> Method = GET
-	--> Path   = /
 
 
 New Log:
-	--> Date   = 02/10/2023, 9:13:00 pm
+	--> Date   = 03/10/2023, 6:46:50 pm
 	--> IP     = ::1
-	--> Method = GET
-	--> Path   = /api
-
-New Log:
-	--> Date   = 02/10/2023, 9:13:04 pm
-	--> IP     = ::1
-	--> Method = GET
-	--> Path   = /api
-
-New Log:
-	--> Date   = 02/10/2023, 9:16:07 pm
-	--> IP     = ::1
-	--> Method = GET
-	--> Path   = /api
+	--> Method = POST
+	--> Path   = /api/web/generate
+	--> Body   = devnishant.vercel.app
+	

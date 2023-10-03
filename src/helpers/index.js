@@ -5,4 +5,4 @@ function extractJSONContent(jsonString) {
   return jsonContent;
 }
 
-export { extractJSONContent };
+module.exports = { extractJSONContent };

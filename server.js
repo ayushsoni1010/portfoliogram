@@ -1,11 +1,11 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import path from "path";
-import scraperRoutes from "./src/routes/scraperRoutes.js";
-import openaiRoutes from "./src/routes/openaiRoutes.js";
-import { logRequestResponse } from "./src/middlewares/index.js";
-import { connectMongoDB } from "./src/config/database.js";
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const path = require("path");
+const scraperRoutes = require("./src/routes/scraperRoutes");
+const openaiRoutes = require("./src/routes/openaiRoutes");
+const { logRequestResponse } = require("./src/middlewares/index");
+const { connectMongoDB } = require("./src/config/database");
 
 dotenv.config();
 
@@ -30,13 +30,13 @@ app.get("/api", (_req, res) => {
   res.json({ message: "Hey there!" });
 });
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("frontend/build"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-//   });
-// }
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);

@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+const puppeteer = require("puppeteer");
 
 async function getScrapedData(website) {
   const browser = await puppeteer.launch({ headless: false });
@@ -143,4 +143,4 @@ async function extractInnerText(page) {
   }
 }
 
-export { getScrapedData };
+module.exports = { getScrapedData };

@@ -1,5 +1,5 @@
-import { errorResponse, successResponse } from "../utils/response.js";
-import { generalGenie } from "../services/openaiService.js";
+const { errorResponse, successResponse } = require("../utils/response.js");
+const { generalGenie } = require("../services/openaiService.js");
 
 async function generateAnswers(request, response) {
   try {
@@ -25,4 +25,4 @@ async function generateAnswers(request, response) {
   }
 }
 
-export { generateAnswers };
+module.exports = { generateAnswers };

@@ -1,5 +1,5 @@
-import openai from "../config/openai.js";
-import { errorResponse } from "../utils/response.js";
+const openai = require("../config/openai.js");
+const { errorResponse } = require("../utils/response.js");
 
 async function askGenie(type, data) {
   if (!data) {
@@ -50,8 +50,8 @@ async function askGenie(type, data) {
     });
 
     // Extract the data from the response
-    const data = response?.choices[0]?.text;
-    return data;
+    const responseData = response?.choices[0]?.text;
+    return responseData;
   } catch (error) {
     console.log("Error", error);
   }
@@ -72,12 +72,12 @@ async function generalGenie(_request, response, prompt) {
     });
 
     // Extract the data from the response
-    const data = response?.choices[0]?.text;
-    return data;
+    const responseData = response?.choices[0]?.text;
+    return responseData;
   } catch (error) {
     console.log("Error", error);
     return errorResponse(response, error);
   }
 }
 
-export { askGenie, generalGenie };
+module.exports = { askGenie, generalGenie };

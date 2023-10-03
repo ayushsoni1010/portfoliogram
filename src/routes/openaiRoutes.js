@@ -1,6 +1,6 @@
-import express from "express";
-import { generateAnswers } from "../controllers/openaiController.js";
-import { successResponse, errorResponse } from "../utils/response.js";
+const express = require("express");
+const { generateAnswers } = require("../controllers/openaiController.js");
+const { successResponse, errorResponse } = require("../utils/response.js");
 
 const router = express.Router();
 
@@ -22,8 +22,8 @@ router.post("/generate", async (request, response) => {
     return await generateAnswers(request, response);
   } catch (error) {
     console.error(`Error: ${error}`);
-    errorResponse(response, "An error occured while generating data.", error);
+    errorResponse(response, "An error occurred while generating data.", error);
   }
 });
 
-export default router;
+module.exports = router;

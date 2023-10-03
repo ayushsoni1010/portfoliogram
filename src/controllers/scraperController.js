@@ -1,17 +1,17 @@
-import { getScrapedData } from "../services/scraperService.js";
-import { askGenie } from "../services/openaiService.js";
-import { extractJSONContent } from "../helpers/index.js";
-import { successResponse, errorResponse } from "../utils/response.js";
+const { getScrapedData } = require("../services/scraperService.js");
+const { askGenie } = require("../services/openaiService.js");
+const { extractJSONContent } = require("../helpers/index.js");
+const { successResponse, errorResponse } = require("../utils/response.js");
 
 async function handleScrapeData(request, response) {
   try {
-    const userInput = request?.query?.website;
+    const { prompt } = request?.body;
 
-    if (!userInput) {
+    if (!prompt) {
       successResponse(response, "Please enter the website url: ");
     }
 
-    const websiteUrl = "https://" + userInput;
+    const websiteUrl = "https://" + prompt;
 
     const scrapedData = await getScrapedData(websiteUrl);
 
@@ -52,4 +52,4 @@ async function handleScrapeData(request, response) {
   }
 }
 
-export { handleScrapeData };
+module.exports = { handleScrapeData };

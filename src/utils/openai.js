@@ -1,5 +1,5 @@
-import OpenAI from "openai";
-import * as dotenv from "dotenv";
+const OpenAI = require("openai");
+const dotenv = require("dotenv");
 dotenv.config();
 
 // Initialize openai object with the API key
@@ -63,4 +63,4 @@ async function extractOtherData(prompt) {
   }
 }
 
-export { openai, generateJSONData, extractOtherData };
+module.exports = { openai, generateJSONData, extractOtherData };

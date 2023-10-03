@@ -1,30 +1,29 @@
-import express from "express";
-import { handleScrapeData } from "../controllers/scraperController.js";
-import { errorResponse, successResponse } from "../utils/response.js";
+const express = require("express");
+const { handleScrapeData } = require("../controllers/scraperController.js");
+const { successResponse, errorResponse } = require("../utils/response.js");
 
 const router = express.Router();
 
 router.get("/", async (_request, response) => {
-  return successResponse(response, "Welcome to Portfolio-Pulse API");
+  return successResponse(response, "Welcome to OpenAI API");
 });
 
-router.get("/generate", async (request, response) => {
+router.post("/generate", async (request, response) => {
   try {
-    const website = request?.query?.website;
+    const prompt = request?.body?.prompt;
 
-    if (!website) {
-      errorResponse(response, "Please enter the website url: ");
+    if (!prompt) {
+      return errorResponse(
+        response,
+        "Please enter the prompt to generate data"
+      );
     }
 
     return await handleScrapeData(request, response);
   } catch (error) {
     console.error(`Error: ${error}`);
-    return errorResponse(
-      response,
-      "An error occured while scraping data.",
-      error
-    );
+    errorResponse(response, "An error occurred while generating data.", error);
   }
 });
 
-export default router;
+module.exports = router;

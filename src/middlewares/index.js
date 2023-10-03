@@ -1,4 +1,4 @@
-import fs from "fs";
+const fs = require("fs");
 
 function logRequestResponse(filename) {
   return (request, response, next) => {
@@ -6,7 +6,7 @@ function logRequestResponse(filename) {
 
     fs.appendFile(
       filename,
-      `\n\nNew Log:\n\t--> Date   = ${date}\n\t--> IP     = ${request.ip}\n\t--> Method = ${request.method}\n\t--> Path   = ${request.path}`,
+      `\n\nNew Log:\n\t--> Date   = ${date}\n\t--> IP     = ${request.ip}\n\t--> Method = ${request.method}\n\t--> Path   = ${request.path}\n\t--> Body   = ${request.body.prompt}\n\t`,
       (error, data) => {
         if (error) {
           console.error(`Error: ${error}`);
@@ -17,4 +17,4 @@ function logRequestResponse(filename) {
   };
 }
 
-export { logRequestResponse };
+module.exports = { logRequestResponse };

@@ -2,7 +2,6 @@
   "name": "portfolio-pulse",
   "version": "1.0.0",
   "description": "Portfolio Pulse is a web scraping and data extraction tool for analyzing portfolio websites. It extracts information about individuals, their skills, and social profiles, providing valuable insights.",
-  "type": "module",
   "license": "AGPL-3.0",
   "private": false,
   "homepage": "https://github.com/ayushsoni1010/portfolio-pulse",
