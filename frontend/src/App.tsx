@@ -5,7 +5,6 @@ import { Input, Button } from "@material-tailwind/react";
 import { helpers } from "./helpers";
 
 function App() {
-  console.log(helpers.apiURL);
   const [website, setWebsite] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");

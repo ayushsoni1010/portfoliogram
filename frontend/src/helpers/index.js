@@ -1,8 +1,8 @@
 const helpers = {
   apiURL:
-    process.env.NODE_ENV !== "production"
+    process.env.NODE_ENV !== "development"
       ? `http://localhost:8000`
-      : `${window.location.protocol}://${window.location.host}`,
+      : `http://${window.location.host}`,
 };
 
 export { helpers };
