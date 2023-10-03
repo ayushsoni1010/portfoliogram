@@ -27,7 +27,7 @@ jobs:
       - run: npm run build --if-present
       - run: cd frontend && npm install && npm run build --if-present
       # - run: systemctl start pm2-root
-      # - run: pm2 start backend
+      - run: pm2 start default
       # - run: chmod +x ./pm2_runner.sh
       # - run: bash ./pm2_runner.sh
-      - run: systemctl start pm2-ayush
+      # - run: systemctl start pm2-ayush
