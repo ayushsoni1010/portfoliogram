@@ -10,7 +10,7 @@ const { connectMongoDB } = require("./src/config/database");
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 const MONGO_URL = process.env.MONGO_URL;
 
 // Mongoose Connection
