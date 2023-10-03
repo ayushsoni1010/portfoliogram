@@ -27,3 +27,9 @@ jobs:
       - run: npm run build --if-present
       - run: cd frontend && npm install && npm run build --if-present
       # - run: sudo pm2 start backend
+      - run: | 
+          pm2 stop 0
+          pm2 start 0
+          pm2 save
+          sudo service nginx restart
+
