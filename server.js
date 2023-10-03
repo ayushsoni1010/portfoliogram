@@ -1,10 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import scraperRoutes from "./routes/scraperRoutes.js";
-import openaiRoutes from "./routes/openaiRoutes.js";
-import { logRequestResponse } from "./middlewares/index.js";
-import { connectMongoDB } from "./config/connection.js";
+import path from "path";
+import scraperRoutes from "./src/routes/scraperRoutes.js";
+import openaiRoutes from "./src/routes/openaiRoutes.js";
+import { logRequestResponse } from "./src/middlewares/index.js";
+import { connectMongoDB } from "./src/config/database.js";
 
 dotenv.config();
 
@@ -19,17 +20,23 @@ const MONGO_URL = process.env.MONGO_URL;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(logRequestResponse("log.txt"));
+app.use(logRequestResponse("logs/log.txt"));
 
 // Routes
 app.use("/api/web", scraperRoutes);
 app.use("/api/ai", openaiRoutes);
 
-app.get("/", (_req, res) => {
+app.get("/api", (_req, res) => {
   res.json({ message: "Hey there!" });
 });
 
-console.log("Hey, TypeScript here :)");
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("frontend/build"));
+
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+//   });
+// }
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);

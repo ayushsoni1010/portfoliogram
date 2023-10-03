@@ -13,7 +13,7 @@ router.get("/generate", async (request, response) => {
     const website = request?.query?.website;
 
     if (!website) {
-      errorResponseResponse(response, "Please enter the website url: ");
+      errorResponse(response, "Please enter the website url: ");
     }
 
     return await handleScrapeData(request, response);
