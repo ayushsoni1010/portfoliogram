@@ -1,7 +1,11 @@
 const puppeteer = require("puppeteer");
 
 async function getScrapedData(website) {
-  const browser = await puppeteer.launch({ headless: false });
+  /**@Development @default false */
+  // const browser = await puppeteer.launch({ headless: false });
+
+  /**@Production @default true */
+  const browser = await puppeteer.launch({ headless: true });
 
   try {
     // Launch a new browser instance
