@@ -4,8 +4,8 @@ async function getScrapedData(website) {
   /**@Development @default false */
   // const browser = await puppeteer.launch({ headless: false });
 
-  /**@Production @default true */
-  const browser = await puppeteer.launch({ headless: true });
+  /**@Production @default new */
+  const browser = await puppeteer.launch({ headless: "new" });
 
   try {
     // Launch a new browser instance
