@@ -49,7 +49,7 @@ To get started with Portfoliogram, follow the installation and usage instruction
 
 1. Clone the repository to your local machine:
 ```
-git clone https://github.com/your-username/portfoliogram.git
+git clone https://github.com/ayushsoni1010/portfoliogram.git
 ```
 
 2. Install the required dependencies:
@@ -91,7 +91,7 @@ We welcome contributions to enhance Portfoliogram. If you'd like to contribute, 
 
 ## Issues 🐛
 
-If you encounter any issues or have suggestions, please report them in the [issue tracker](https://github.com/your-username/Portfoliogram/issues).
+If you encounter any issues or have suggestions, please report them in the [issue tracker](https://github.com/ayushsoni1010/Portfoliogram/issues).
 
 ## Tech Stack Used 🛠️
 
