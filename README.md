@@ -105,10 +105,16 @@ If you encounter any issues or have suggestions, please report them in the [issu
 - OpenAI
 - MongoDB
 - Prompt Engineering
+- Docker
+- Amazon Web Services
+- DigitalOcean
+- CI/CD
+- GitHub Actions
+- Jest
 
 ## Acknowledgments 🙏
 
 - Special thanks to the open-source community for their valuable contributions and tools that made this project possible.
 - Inspired by the need for efficient portfolio data analysis.
 
-Happy scraping with Portfoliogram! 🎉
+Happy scraping with **Portfoliogram**! 🎉
