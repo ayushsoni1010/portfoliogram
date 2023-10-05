@@ -1,4 +1,4 @@
-name: CICD
+name: "CICD: Build Docker Image and deploy Node.js app to AWS EC2 Cloud"
 
 on:
   push:
@@ -16,17 +16,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build docker image
-        run: docker build -t ayushsoni1010/portfolio-pulse .
+        run: docker build -t ayushsoni1010/portfoliogram .
       - name: Publish image to docker hub
-        run: docker push ayushsoni1010/portfolio-pulse:latest
+        run: docker push ayushsoni1010/portfoliogram:latest
 
   deploy:
     needs: build
     runs-on: [self-hosted]
     steps:
       - name: Pull the image from Docker hub
-        run: docker pull ayushsoni1010/portfolio-pulse:latest
+        run: docker pull ayushsoni1010/portfoliogram:latest
       - name: Delete old container
         run: docker rm -f nodejs-app-container
       - name: Run docker container
-        run: docker run -d -p 8000:8000 --name nodejs-app-container ayushsoni1010/portfolio-pulse
+        run: docker run -d -p 8000:8000 --name nodejs-app-container ayushsoni1010/portfoliogram

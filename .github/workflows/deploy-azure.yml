@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy acqtion: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - portfolio-pulse
+name: Build and deploy Node.js app to Azure
 
 on:
   push:
@@ -48,7 +48,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'portfolio-pulse'
+          app-name: 'portfoliogram'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2A46978D134F4CFA97129839F1091320 }}
           package: .
