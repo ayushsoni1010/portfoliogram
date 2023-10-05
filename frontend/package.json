@@ -1,7 +1,7 @@
 {
-  "name": "portfolio-pulse",
+  "name": "portfoliogram",
   "version": "1.0.0",
-  "description": "Portfolio Pulse is a web scraping and data extraction tool for analyzing portfolio websites. It extracts information about individuals, their skills, and social profiles, providing valuable insights.",
+  "description": "Portfoliogram is a web scraping and data extraction tool for analyzing portfolio websites. It extracts information about individuals, their skills, and social profiles, providing valuable insights.",
   "private": true,
   "dependencies": {
     "@material-tailwind/react": "^2.1.2",

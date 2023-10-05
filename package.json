@@ -1,16 +1,16 @@
 {
-  "name": "portfolio-pulse",
+  "name": "portfoliogram",
   "version": "1.0.0",
-  "description": "Portfolio Pulse is a web scraping and data extraction tool for analyzing portfolio websites. It extracts information about individuals, their skills, and social profiles, providing valuable insights.",
+  "description": "Portfoliogram is a web scraping and data extraction tool for analyzing portfolio websites. It extracts information about individuals, their skills, and social profiles, providing valuable insights.",
   "license": "AGPL-3.0",
   "private": false,
-  "homepage": "https://github.com/ayushsoni1010/portfolio-pulse",
+  "homepage": "https://github.com/ayushsoni1010/portfoliogram",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ayushsoni1010/portfolio-pulse.git"
+    "url": "https://github.com/ayushsoni1010/portfoliogram.git"
   },
   "bugs": {
-    "url": "https://github.com/ayushsoni1010/portfolio-pulse/issues"
+    "url": "https://github.com/ayushsoni1010/portfoliogram/issues"
   },
   "keywords": [
     "web scraping",
