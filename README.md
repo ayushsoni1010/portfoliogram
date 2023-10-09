@@ -23,15 +23,15 @@ So, don your creative hats, wield your coding compass, and chart a course for in
 Join us in shaping the future of Portfoliogram and let's make waves together in the open source community! 🌟
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Issues](#issues)
-- [Tech Stack Used](#tech-stack-used)
-- [Acknowledgments](#acknowledgments)
+- [Introduction](#introduction-)
+- [Features](#features-)
+- [Getting Started](#getting-started-)
+- [Usage](#usage-)
+- [Contributing](#contributing-)
+- [License](#license-)
+- [Issues](#issues-)
+- [Tech Stack Used](#tech-stack-used-)
+- [Acknowledgments](#acknowledgments-)
 
 ## Introduction 📝
 
@@ -85,15 +85,11 @@ Contributions to Portfoliogram are welcome! Feel free to open issues, submit pul
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Contributing 🚀
-
-We welcome contributions to enhance Portfoliogram. If you'd like to contribute, please follow our [contributing guidelines](CONTRIBUTING.md).
-
 ## Issues 🐛
 
 If you encounter any issues or have suggestions, please report them in the [issue tracker](https://github.com/ayushsoni1010/Portfoliogram/issues).
 
-## Tech Stack Used 🛠️
+## Tech Stack Used 💅
 
 - React
 - Node.js
@@ -116,5 +112,7 @@ If you encounter any issues or have suggestions, please report them in the [issu
 
 - Special thanks to the open-source community for their valuable contributions and tools that made this project possible.
 - Inspired by the need for efficient portfolio data analysis.
+
+---
 
 Happy scraping with **Portfoliogram**! 🎉
